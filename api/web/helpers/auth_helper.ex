@@ -3,14 +3,17 @@ defmodule Slax.Helpers.AuthHelper do
   alias Slax.User
   
   def ensure_token(conn, _) do
-    token = conn.req_headers[:authorization]
-    user = User.authenticate_by_token(token)
-    case user do
+    token = case get_req_header(conn, "authorization") do
+      [t] -> t
+      [] -> nil
+    end
+    
+    case User.authenticate_by_token(token) do
       nil ->
         conn
         |> put_status(:unauthorized)
         |> Phoenix.Controller.json %{error: "Invalid authentication token"}
-      _ -> 
+      user -> 
         assign(conn, :user, user)
     end
   end

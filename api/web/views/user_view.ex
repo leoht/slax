@@ -3,6 +3,7 @@ defmodule Slax.UserView do
   
   def render("user.json", %{user: user}) do
     %{
+      id: user.id,
       email: user.email,
       api_token: user.api_token,
       first_name: user.first_name,

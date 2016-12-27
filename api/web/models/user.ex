@@ -26,7 +26,7 @@ defmodule Slax.User do
   def create(params) do
     changeset(%Slax.User{}, params)
     |> put_change(:password, hashed_password(params["password"]))
-    |> put_change(:api_token, "test")
+    |> put_change(:api_token, :base64.encode(:crypto.strong_rand_bytes(24)))
     |> Slax.Repo.insert()
   end
   
