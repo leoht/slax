@@ -1,0 +1,16 @@
+version: "2"
+services:
+  api:
+    build: ./api
+    container_name: slax_api
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./api:/api
+  web:
+    build: ./web
+    container_name: slax_web
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./web:/web
