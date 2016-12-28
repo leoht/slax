@@ -16,7 +16,9 @@ defmodule Slax.UserController do
         |> put_status(:created)
         |> render "user.json", user: user
       {:error, changeset} ->
-        json conn, %{error: "error creating user"}
+        conn
+        |> put_status(:bad_request)
+        |> json %{error: "error creating user"}
     end
   end
   

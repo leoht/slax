@@ -1,0 +1,13 @@
+body {
+  background: #c9e5ed;
+}
+
+.container.home {
+  width: 60%;
+  margin: 40px auto;
+}
+
+.container.profile {
+  width: 85%;
+  margin: 40px auto;
+}

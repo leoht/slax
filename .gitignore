@@ -21,4 +21,5 @@
 # Alternatively, you may comment the line below and commit the
 # secrets file as long as you replace its contents by environment
 # variables.
+/slax/config/dev.secret.exs
 /slax/config/prod.secret.exs
