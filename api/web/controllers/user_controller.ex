@@ -14,7 +14,7 @@ defmodule Slax.UserController do
       {:ok, user} ->
         conn
         |> put_status(:created)
-        |> render "user.json", user: user
+        |> render("user.json", user: user)
       {:error, changeset} ->
         conn
         |> put_status(:bad_request)
@@ -26,7 +26,7 @@ defmodule Slax.UserController do
     case User.authenticate(email, password) do
       {:ok, user} ->
         conn
-        |> render "user.json", user: user
+        |> render("user.json", user: user)
       {:error, _} ->
         conn
         |> put_status(:not_found)
@@ -36,13 +36,13 @@ defmodule Slax.UserController do
   
   def show(conn, %{"id" => id}) do
     case Slax.Repo.get(Slax.User, id) do
-      user ->
-        conn
-        |> render "user.json", user: user
       nil ->
         conn
         |> put_status(:not_found)
         |> json %{error: "Not found"}
+      user ->
+        conn
+        |> render("public_user.json", user: user)
     end
   end
   
@@ -52,7 +52,7 @@ defmodule Slax.UserController do
     case Slax.Repo.update(changeset) do
       {:ok, user} ->
         conn
-        |> render "user.json", user: user
+        |> render("user.json", user: user)
       {:error, changeset} ->
         conn
         |> put_status(:bad_request)

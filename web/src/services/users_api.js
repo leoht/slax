@@ -11,6 +11,7 @@ app.factory("usersApi", ["$http", "config",
         return $http.get(config.apiBaseUrl + "/users/" + userId);
       },
       update: function (userId, updates) {
+        console.log(updates);
         return $http.put(config.apiBaseUrl + "/users/" + userId, updates); 
       }
    }

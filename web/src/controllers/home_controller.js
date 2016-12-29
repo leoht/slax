@@ -6,18 +6,21 @@ app.controller("HomeController", [
   function ($scope, usersApi, auth, $location) {
     $scope.login = function () {
       usersApi.authenticate($scope.auth)
-        .then(function (response) {
+        .then(function success(response) {
           auth.setUser(response.data);
           $location.path("/profile");
+        }, function failure(response) {
+          $scope.loginError = "Invalid credentials";
         });
     };
     
     $scope.register = function () {
       usersApi.create($scope.registration)
-        .then(function (response) {
-          console.log(response);
+        .then(function success(response) {
           auth.setUser(response.data);
           $location.path("/profile");
+        }, function failure(response) {
+          $scope.signupError = "Error creating your account!";
         });
     };
   }
