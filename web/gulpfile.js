@@ -7,8 +7,14 @@ gulp.task('js', function () {
     .pipe(gulp.dest("public/"))
 });
 
+gulp.task('vendor', function () {
+  gulp.src(["node_modules/phoenix-socket/dist/socket.js"])
+    .pipe(concat("vendor.js"))
+    .pipe(gulp.dest("public/"))
+});
+
 gulp.task('watch', function () {
   gulp.watch(["src/**/*.js"], ['js']);
 })
 
-gulp.task('default', ['js', 'watch']);
+gulp.task('default', ['js', 'vendor', 'watch']);

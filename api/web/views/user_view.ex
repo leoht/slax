@@ -16,8 +16,11 @@ defmodule Slax.UserView do
     %{
       id: user.id,
       first_name: user.first_name,
-      last_name: user.last_name,
-      inserted_at: user.inserted_at
+      last_name: user.last_name
     }
+  end
+  
+  def render("users.json", %{users: users}) do
+    render_many(users, __MODULE__, "public_user.json")
   end
 end

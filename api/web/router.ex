@@ -10,5 +10,14 @@ defmodule Slax.Router do
     
     post "/users/authenticate", UserController, :authenticate
     resources "/users", UserController, except: [:new, :edit]
+    
+    ###
+    # FRIENDSHIPS
+    ###
+    get "/friendships/pending", FriendshipController, :pending
+    
+    resources "/friendships", FriendshipController, except: [:new, :edit] do
+      put "/accept", FriendshipController, :accept
+    end
   end
 end

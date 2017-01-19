@@ -5,7 +5,8 @@ var app = angular.module('slax', [
 app.config(["$routeProvider", function ($routeProvider) {
   $routeProvider
     .when("/", {controller: "HomeController", templateUrl: "views/home.html"})
-    .when("/profile", {controller: "ProfileController", templateUrl: "views/profile.html"});
+    .when("/profile", {controller: "ProfileController", templateUrl: "views/profile.html"})
+    .when("/search", {controller: "SearchController", templateUrl: "views/search.html"});
 }]);
 
 app.run([
@@ -30,5 +31,6 @@ app.run([
 ]);
 
 app.value("config", {
-  apiBaseUrl: "http://192.168.99.100:4000/api"
+  apiBaseUrl: "http://192.168.99.100:4000/api",
+  socketBaseUrl: "ws://192.168.99.100:4000/socket"
 });

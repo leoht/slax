@@ -1,0 +1,11 @@
+<div class="panel panel-default" ng-show="pendingFriendships.length > 0">
+  <div class="panel-heading">
+    <h3 class="panel-title">Pending friendships</h3>
+  </div>
+  <div class="panel-body">
+    <div class="friendship-item panel clearfix" ng-repeat="fship in pendingFriendships">
+        {{fship.source_user.first_name}} {{fship.source_user.last_name}}
+        <a class="btn btn-success btn-sm pull-right" ng-click="acceptFriendship($event, fship.id)">Accept</a>
+    </div>
+  </div>
+</div>

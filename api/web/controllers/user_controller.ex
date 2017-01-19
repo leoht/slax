@@ -6,7 +6,9 @@ defmodule Slax.UserController do
   plug :check_ownership when action in [:update]
   
   def index(conn, _params) do
-    json conn, %{message: "ok"}
+    conn |> render("users.json", %{
+      users: Slax.Repo.all(Slax.User)
+    })
   end
   
   def create(conn, %{"user" => user_params}) do
@@ -35,6 +37,9 @@ defmodule Slax.UserController do
   end
   
   def show(conn, %{"id" => id}) do
+    user_id = conn.assigns[:user].id
+    view_name = if to_string(user_id) == id, do: "user.json", else: "public_user.json"
+    
     case Slax.Repo.get(Slax.User, id) do
       nil ->
         conn
@@ -42,7 +47,7 @@ defmodule Slax.UserController do
         |> json %{error: "Not found"}
       user ->
         conn
-        |> render("public_user.json", user: user)
+        |> render(view_name, user: user)
     end
   end
   

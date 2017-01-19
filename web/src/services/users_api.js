@@ -1,6 +1,9 @@
 app.factory("usersApi", ["$http", "config",
   function ($http, config) {
     return {
+      all: function () {
+        return $http.get(config.apiBaseUrl + "/users")
+      },
       create: function (params) {
         return $http.post(config.apiBaseUrl + "/users", { user: params });
       },

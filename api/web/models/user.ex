@@ -1,6 +1,5 @@
 defmodule Slax.User do
   use Slax.Web, :model
-  @derive {Poison.Encoder, only: [:email, :first_name, :last_name, :api_token]}
 
   schema "users" do
     field :email, :string
@@ -11,6 +10,11 @@ defmodule Slax.User do
     field :api_token, :string
 
     timestamps()
+    
+    has_many :outcoming_friendships, Slax.Friendship, foreign_key: :source_user_id
+    has_many :incoming_friendships, Slax.Friendship, foreign_key: :target_user_id
+    has_many :friends_as_source, through: [:outcoming_friendships, :target_user]
+    has_many :friends_as_target, through: [:incoming_friendships, :source_user] 
   end
 
   @doc """
